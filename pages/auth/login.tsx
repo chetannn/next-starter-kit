@@ -22,19 +22,18 @@ const Login: NextPage = () => {
   const login: SubmitHandler<LoginValues> = async (values) => {
 
     const res = await signIn('credentials', {
-        ...values
+        ...values,
+        redirect: false
     })
 
-      console.log('res', res)
-
+    if(res?.ok) {
       router.push('/dashboard')
+    }
+
   }
 
   return (
     <div className='flex h-screen items-center justify-center'>
-
-
-
 
         <section className='max-w-md w-full bg-white border shadow p-4'>
 
