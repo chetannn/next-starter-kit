@@ -2,8 +2,9 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
+import Input from "../../components/Input"
 
 interface LoginValues {
   email: string;
@@ -15,7 +16,7 @@ const Login: NextPage = () => {
   const router = useRouter()
 
   const form = useForm<LoginValues>();
-  const { formState } = form;
+  const { formState, control } = form;
   const { isSubmitting } = formState
 
 
@@ -40,8 +41,13 @@ const Login: NextPage = () => {
           <form onSubmit={form.handleSubmit(login)}>
 
           <div className='mt-4'>
-            <label className='w-full text-sm  text-gray-700'>Email</label>
-            <input {...form.register('email')} className='w-full px-4 py-2 rounded border focus:border-2 focus:outline-none focus:border-purple-600' />
+            <label className='w-full text-sm text-gray-700'>Email</label>
+             <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field }) => <Input className="w-full px-4 py-2" {...field} />}
+            />
           </div>
 
 
