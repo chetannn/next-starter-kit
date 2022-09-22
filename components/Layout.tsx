@@ -1,7 +1,7 @@
 import Sidebar from './Sidebar'
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import Link from 'next/link';
+import AppLink from './AppLink';
 
 export default function Layout(props) {
   return (
@@ -26,24 +26,24 @@ export default function Layout(props) {
               <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <Menu.Item as={Fragment}>
                   {({ active }) => (
-                    <Link href="/profile">
+                    <AppLink href="/profile">
                       <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Your Profile</a>
-                    </Link>
+                    </AppLink>
                   )}
                 </Menu.Item>
 
                 <Menu.Item>
                   {({ active }) => (
-                    <Link href='/settings'>
+                    <AppLink href='/settings'>
                       <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Settings</a>
-                    </Link>
+                    </AppLink>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <Link href="/logout">
+                    <AppLink href="/logout">
                       <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Logout</a>
-                    </Link>
+                    </AppLink>
                   )}
                 </Menu.Item>
               </Menu.Items>
