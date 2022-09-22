@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
+import { hash } from "bcryptjs"
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -8,12 +9,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const data = req.body
+
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      email: data.email
+    }
+  })
+
+  if(existingUser) {
+    
+    return res.status(422).json({ message: 'Email already taken!' })
+  }
+
+
+  const hashedPassword = await hash(data.password, 12)
   
-  const user = await prisma.user.create({
+  await prisma.user.create({
     data: {
       name: data.name,
       email: data.email,
-      password: data.password
+      password: hashedPassword
     }
 
   })
