@@ -26,23 +26,24 @@ export default function Layout(props) {
               <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <Menu.Item as={Fragment}>
                   {({ active }) => (
-                    <AppLink href="/profile">
-                      <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Your Profile</a>
+                    <AppLink href="/profile" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`} >
+                      Your Profile
                     </AppLink>
                   )}
                 </Menu.Item>
 
                 <Menu.Item>
                   {({ active }) => (
-                    <AppLink href='/settings'>
-                      <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Settings</a>
+                    <AppLink href="/settings" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`} >
+                      Settings
                     </AppLink>
                   )}
                 </Menu.Item>
+
                 <Menu.Item>
                   {({ active }) => (
-                    <AppLink href="/logout">
-                      <a className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>Logout</a>
+                    <AppLink href="/logout" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>
+                      Logout
                     </AppLink>
                   )}
                 </Menu.Item>
