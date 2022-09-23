@@ -52,7 +52,7 @@ export default function Layout(props) {
           </Menu>
         </nav>
         
-        <main className='px-4 pt-4'>{props.children}</main>
+        <main className='px-4 pt-4 flex-1 bg-gray-100'>{props.children}</main>
       </div>
     </div>
   );
