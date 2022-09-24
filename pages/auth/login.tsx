@@ -34,9 +34,9 @@ const Login: NextPage = () => {
   }
 
   return (
-    <div className='flex h-screen items-center justify-center'>
+    <div className='flex font-nunito bg-gray-50 h-screen items-center justify-center'>
 
-        <section className='max-w-md w-full bg-white border shadow p-4'>
+        <section className='max-w-md w-full bg-white border rounded-lg shadow p-4'>
 
           <form onSubmit={form.handleSubmit(login)}>
 

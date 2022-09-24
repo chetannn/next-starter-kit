@@ -1,8 +1,12 @@
 import type { NextPage } from 'next'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
+import { useSession } from 'next-auth/react'
 
 const Profile: NextPage = () => {
+
+  const { data: session } = useSession()
+
     return (
         <Layout>
             <div className="max-w-5xl w-full mx-auto px-8">
@@ -11,11 +15,11 @@ const Profile: NextPage = () => {
                     <div className="px-4 py-3">
                         <div className="mb-4">
                             <label className="block text-gray-700 tracking-wider mb-1">Name</label>
-                            <Input className="px-3 py-2 w-full" />
+                            <Input value={session?.user?.name} className="px-3 py-2 w-full" />
                         </div>
                          <div className="mb-4">
                             <label className="block text-gray-700 tracking-wider mb-1">Email</label>
-                            <Input className="px-3 py-2 w-full" />
+                            <Input value={session?.user?.email} className="px-3 py-2 w-full" />
                         </div>
                     </div>
 

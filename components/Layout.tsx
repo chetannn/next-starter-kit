@@ -5,7 +5,7 @@ import AppLink from './AppLink';
 
 export default function Layout(props) {
   return (
-    <div className='flex min-h-screen antialiased'>
+    <div className='flex font-nunito min-h-screen antialiased'>
       <Sidebar />
       <div className='flex-1'>
         <nav className='flex py-3 px-6 justify-between items-center bg-white shadow'>
@@ -42,7 +42,7 @@ export default function Layout(props) {
 
                 <Menu.Item>
                   {({ active }) => (
-                    <AppLink href="/logout" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>
+                    <AppLink href="/auth/login" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>
                       Logout
                     </AppLink>
                   )}
