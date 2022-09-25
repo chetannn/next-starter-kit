@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+import Button from '../../components/Button'
 
 type SignupFormValues = {
   name: string;
@@ -65,13 +66,9 @@ const SignUp: NextPage = () => {
             <input type='password' {...register('confirm_password')} className='w-full px-4 py-2 rounded border focus:border-2 focus:border-purple-600 focus:outline-none' />
           </div>
 
-
-            
           <div className='mt-4'>
-            <button disabled={isSubmitting} className='w-full text-sm text-white bg-purple-600 hover:bg-purple-700 px-3 py-2'>Sign Up</button>
+            <Button className="w-full" disabled={isSubmitting}>Sign Up</Button>
             </div>
-
-
         </form>
 
             </FormProvider>

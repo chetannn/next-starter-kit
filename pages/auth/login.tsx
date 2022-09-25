@@ -5,6 +5,7 @@ import React from 'react'
 import { SubmitHandler, useForm, Controller } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import Input from "../../components/Input"
+import Button from '../../components/Button'
 
 interface LoginValues {
   email: string;
@@ -58,8 +59,7 @@ const Login: NextPage = () => {
 
             
           <div className='mt-4'>
-
-            <button disabled={isSubmitting} className='w-full text-white bg-purple-600 hover:bg-purple-700 px-3 py-2'>Login</button>
+            <Button className="w-full" disabled={isSubmitting}>Login</Button>
 
             <Link  href='/auth/forgot-password'>
               <a className='flex justify-end text-sm mt-3 text-purple-600'>
