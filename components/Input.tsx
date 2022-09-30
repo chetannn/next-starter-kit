@@ -1,8 +1,15 @@
-const Input = ({ className, ...props }) => {
+interface PropTypes {
+  className: string;
+  onChange: (e: any) => void;
+  value: string
+}
+
+const Input = ({ className, onChange, value} : PropTypes) => {
   return (
     <input
       className={`${className} rounded border focus:border-2 focus:outline-none focus:border-purple-600`}
-      {...props}
+      onChange={onChange}
+      value={value}
     />
   );
 }

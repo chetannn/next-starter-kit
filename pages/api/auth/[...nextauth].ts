@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "../../../lib/prisma"
-import { compare } from "bcryptjs"
+import { comparePassword } from "../../../lib/auth"
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -36,7 +36,11 @@ export default NextAuth({
           }
         })
 
-        const isCorrectPassword = await compare(credentials?.password, user?.password)
+        if(!user) {
+           return null
+        }
+
+        const isCorrectPassword = await comparePassword(credentials?.password!, user.password)
 
         if(!isCorrectPassword) {
           throw new Error('Incorrect Password')
