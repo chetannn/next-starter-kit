@@ -1,6 +1,7 @@
 import Sidebar from './Sidebar'
 import NavDropDown from './NavDropDown'
 import { ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 export default function Layout({ children }: { children: ReactNode} ) {
   return (
@@ -15,6 +16,8 @@ export default function Layout({ children }: { children: ReactNode} ) {
         
         <main className='px-4 pt-4 flex-1 bg-gray-100'>{children}</main>
       </div>
+
+    <Toaster />      
     </div>
   );
 }

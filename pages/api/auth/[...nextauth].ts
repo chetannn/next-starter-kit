@@ -1,10 +1,10 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { prisma } from "../../../lib/prisma"
 import { comparePassword } from "../../../lib/auth"
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt'
@@ -61,4 +61,6 @@ export default NextAuth({
 
   },
   debug: false
-})
+
+} 
+export default NextAuth(authOptions)
