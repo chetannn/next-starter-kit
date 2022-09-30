@@ -1,10 +1,11 @@
 import React, { Fragment } from "react"
 import { Dialog, Transition } from '@headlessui/react'
 import Input from "./Input";
+import Button from "./Button";
 
 interface Props {
     show?: boolean;
-    onClose: () => void
+    onClose: () => void;
 }
 
 export default function DeleteAccountModal({ show, onClose }: Props) {
@@ -34,7 +35,7 @@ export default function DeleteAccountModal({ show, onClose }: Props) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className='transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all'>
+                            <Dialog.Panel className='transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all'>
                                 <div className="w-full max-w-xl p-6">
                                     <Dialog.Title
                                         as="h3"
@@ -48,7 +49,7 @@ export default function DeleteAccountModal({ show, onClose }: Props) {
                                         </p>
 
                                         <div className="mt-4">
-                                            <Input placeholder='Password' className="w-full px-3 py-2" />
+                                            <Input type="password" placeholder='Password' className="w-full px-3 py-2" />
                                         </div>
 
                                     </div>
@@ -56,8 +57,8 @@ export default function DeleteAccountModal({ show, onClose }: Props) {
                                 </div>
 
                                 <div className="mt-4 flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
-                                    <button type='button' onClick={onClose} className="inline-flex items-center px-3 py-2 bg-gray-800 hover:bg-gray-900 rounded text-white text-sm">Cancel</button>
-                                    <button type='button' className="ml-3 inline-flex items-center px-3 py-2 bg-red-600 hover:bg-red-700 rounded text-white text-sm">Delete Account</button>
+                                    <Button variant="secondary" type='button' onClick={onClose} className="inline-flex items-center text-sm">Cancel</Button>
+                                    <Button variant="danger" type='button' className="ml-3 inline-flex items-center text-sm">Delete Account</Button>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
