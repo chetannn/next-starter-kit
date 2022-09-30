@@ -9,9 +9,12 @@ export default function Settings() {
     const [currentPassword, setCurrentPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [confirmNewPassword, setConfirmNewPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     async function changePassword(e: any) {
         e.preventDefault()
+
+        setLoading(true)
 
         await fetch('/api/auth/change-password', {
             body: JSON.stringify({
@@ -26,6 +29,7 @@ export default function Settings() {
         })
             .then(res => res.json())
             .then((data) => {
+                setLoading(false)
                 toast.success(data.message)
             })
 
@@ -55,7 +59,7 @@ export default function Settings() {
 
                     <footer className="rounded-b-lg px-6 py-3 bg-gray-50">
                         <div className="flex items-center justify-end space-x-2">
-                            <Button className="inline-flex items-center text-sm">Change Password</Button>
+                            <Button loading={loading} className="inline-flex items-center text-sm">Change Password</Button>
                         </div>
                     </footer>
                 </form>
