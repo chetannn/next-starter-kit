@@ -17,6 +17,7 @@ const Profile: NextPage = () => {
     return (
         <Layout>
             <div className="max-w-5xl w-full mx-auto px-8">
+            <h2 className="text-lg font-semibold my-4">Profile</h2>
                 <form className="max-w-2xl rounded-lg shadow bg-white">
                     <div className="px-4 py-3">
                         <div className="mb-4">

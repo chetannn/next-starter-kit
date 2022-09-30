@@ -1,15 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
-import { comparePassword, hashPassword } from '../../../lib/auth'
-import { unstable_getServerSession } from "next-auth"
-import { authOptions } from './[...nextauth]'
+import { comparePassword, hashPassword, getSession } from '../../../lib/auth'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if(req.method !== 'POST') {
         return
     }
 
-    const session = await unstable_getServerSession(req, res, authOptions)
+    const session = await getSession(req, res)
 
     if(!session || !session.user || !session.user.email) {
        return res.status(401).json({ message: 'Not authenticated' })
