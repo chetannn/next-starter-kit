@@ -27,8 +27,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
    const { currentPassword, newPassword, confirmNewPassword } = req.body
 
-   console.log('password', currentPassword, user.password)
-
    if(await !comparePassword(currentPassword, user.password)) {
      return res.status(400).json({ error: 'Incorrect Password' })
    }
@@ -37,7 +35,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'New Password and Confirm New Password should match.' })
    }
 
-   // handle logic for new password and old password match
    if(currentPassword === newPassword) {
         return res.status(400).json({ error: 'New password should not match current password.' })
    }
