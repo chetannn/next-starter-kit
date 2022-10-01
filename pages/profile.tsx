@@ -1,12 +1,13 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext } from 'next'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import DeleteAccountModal from '../components/DeleteAccountModal'
 import Button from '../components/Button'
+import { getSession } from '../lib/auth'
 
-const Profile: NextPage = () => {
+export default function Login() {
 
     const { data: session } = useSession()
     const [deleteAccountModal, setDeleteAccountModal] = useState(false)
@@ -52,5 +53,23 @@ const Profile: NextPage = () => {
     )
 }
 
-export default Profile
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+   const { req, res } = context
+   const session = await getSession(req, res)
+
+   if(!session?.user) {
+      return {
+         redirect: {
+            permanent: false,
+            destination: '/auth/login'
+         }
+      }
+   }
+
+   return {
+      props: {
+
+      }
+   }
+}
 

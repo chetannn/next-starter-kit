@@ -3,6 +3,8 @@ import Input from "../components/Input";
 import toast from "react-hot-toast"
 import { useState } from "react";
 import Button from "../components/Button";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "../lib/auth";
 
 export default function Settings() {
 
@@ -67,4 +69,24 @@ export default function Settings() {
 
         </Layout>
     );
+}
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+   const { req, res } = context
+   const session = await getSession(req, res)
+
+   if(!session?.user) {
+      return {
+         redirect: {
+            permanent: false,
+            destination: '/auth/login'
+         }
+      }
+   }
+
+   return {
+      props: {
+
+      }
+   }
 }

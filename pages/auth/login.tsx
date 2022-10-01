@@ -1,33 +1,43 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import Input from "../../components/Input"
 import Button from '../../components/Button'
+import { getSession } from '../../lib/auth'
 
 
-const Login: NextPage = () => {
+export default function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
 
-  const login  = async (e: any) => {
+  const login = async (e: any) => {
     e.preventDefault()
+    setLoading(true)
+
     const user = {
       email: email,
       password: password
     }
 
-    const res = await signIn('credentials', {
+    try {
+      const res = await signIn('credentials', {
         ...user,
         redirect: false
-    })
+      })
 
-    if(res?.ok) {
-      router.push('/dashboard')
+      if (res?.ok) {
+        setLoading(false)
+        router.push('/dashboard')
+      }
+    }
+    catch (err) {
+      setLoading(false)
     }
 
   }
@@ -35,9 +45,9 @@ const Login: NextPage = () => {
   return (
     <div className='flex font-nunito bg-gray-50 h-screen items-center justify-center'>
 
-        <section className='max-w-md w-full bg-white border rounded-lg shadow p-4'>
+      <section className='max-w-md w-full bg-white border rounded-lg shadow p-4'>
 
-          <form onSubmit={login}>
+        <form onSubmit={login}>
 
           <div className='mt-4'>
             <label className='w-full text-sm text-gray-700'>Email</label>
@@ -50,24 +60,42 @@ const Login: NextPage = () => {
             <Input value={password} onChange={(e: any) => setPassword(e.target.value)} className='w-full px-4 py-2' />
           </div>
 
-            
-          <div className='mt-4'>
-            <Button className="w-full">Login</Button>
 
-            <Link  href='/auth/forgot-password'>
+          <div className='mt-4'>
+            <Button loading={loading} className="w-full">Login</Button>
+
+            <Link href='/auth/forgot-password'>
               <a className='flex justify-end text-sm mt-3 text-purple-600'>
-                  Forgot Password ?
-                </a>
+                Forgot Password ?
+              </a>
             </Link>
 
-            </div>
+          </div>
 
 
-          </form>
+        </form>
 
-          </section>
-      </div>
+      </section>
+    </div>
   );
 }
 
-export default Login
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req, res } = context
+  const session = await getSession(req, res)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+
+    }
+  }
+}
