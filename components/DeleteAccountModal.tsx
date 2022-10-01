@@ -1,7 +1,10 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import { Dialog, Transition } from '@headlessui/react'
 import Input from "./Input";
 import Button from "./Button";
+import toast from "react-hot-toast";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 interface Props {
     show?: boolean;
@@ -9,6 +12,31 @@ interface Props {
 }
 
 export default function DeleteAccountModal({ show, onClose }: Props) {
+
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
+
+    async function deleteAccount() {
+        setLoading(true)
+        fetch('/api/auth/delete-account', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                password
+            })
+        })
+            .then(res => res.json())
+            .then(() => {
+                setLoading(false)
+                toast.success('Account Deleted Successfully')
+                signOut().then(() => {
+                    router.replace('/auth/login')
+                })
+            })
+    }
     return (
         <Transition appear show={show} as={Fragment}>
             <Dialog as="div" className="relative z-10 font-nunito" onClose={onClose}>
@@ -49,7 +77,9 @@ export default function DeleteAccountModal({ show, onClose }: Props) {
                                         </p>
 
                                         <div className="mt-4">
-                                            <Input type="password" placeholder='Password' className="w-full px-3 py-2" />
+                                            <Input value={password}
+                                                onChange={(e: any) => setPassword(e.target.value)}
+                                                type="password" placeholder='Password' className="w-full px-3 py-2" />
                                         </div>
 
                                     </div>
@@ -58,7 +88,7 @@ export default function DeleteAccountModal({ show, onClose }: Props) {
 
                                 <div className="mt-4 flex flex-row justify-end px-6 py-4 bg-gray-100 text-right">
                                     <Button variant="secondary" type='button' onClick={onClose} className="inline-flex items-center text-sm">Cancel</Button>
-                                    <Button variant="danger" type='button' className="ml-3 inline-flex items-center text-sm">Delete Account</Button>
+                                    <Button loading={loading} disabled={loading} onClick={deleteAccount} variant="danger" type='submit' className="ml-3 inline-flex items-center text-sm">Delete Account</Button>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
