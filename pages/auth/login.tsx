@@ -1,4 +1,4 @@
-import type { GetServerSidePropsContext, NextPage } from 'next'
+import type { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -57,7 +57,7 @@ export default function Login() {
 
           <div className='mt-4'>
             <label className='w-full text-sm text-gray-700'>Password</label>
-            <Input value={password} onChange={(e: any) => setPassword(e.target.value)} className='w-full px-4 py-2' />
+            <Input type="password" value={password} onChange={(e: any) => setPassword(e.target.value)} className='w-full px-4 py-2' />
           </div>
 
 

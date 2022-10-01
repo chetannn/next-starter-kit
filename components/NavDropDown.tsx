@@ -1,8 +1,16 @@
 import { Menu, Transition } from '@headlessui/react'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 import AppLink from './AppLink'
 
 const NavDropDown = () => {
+  const router = useRouter()
+  
+  function logout(e: any) {
+      e.preventDefault()
+      signOut({ redirect: false }).then(() => router.replace('/auth/login'))
+  }
     return (
           <Menu as="div">
             <Menu.Button>
@@ -35,7 +43,7 @@ const NavDropDown = () => {
 
                 <Menu.Item>
                   {({ active }) => (
-                    <AppLink href="/auth/login" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>
+                    <AppLink onClick={logout} href="/auth/login" className={`${active ? 'bg-gray-100' : ''} block px-4 py-2 text-gray-700 text-sm`}>
                       Logout
                     </AppLink>
                   )}

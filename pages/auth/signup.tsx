@@ -31,7 +31,7 @@ const SignUp: NextPage = () => {
     })
     .then(() => {
       // sign in 
-      router.push('/dashboard')
+      router.push('/auth/login')
     })
 
   }
@@ -67,7 +67,7 @@ const SignUp: NextPage = () => {
           </div>
 
           <div className='mt-4'>
-            <Button className="w-full" disabled={isSubmitting}>Sign Up</Button>
+            <Button className="w-full" loading={isSubmitting} disabled={isSubmitting}>Sign Up</Button>
             </div>
         </form>
 
