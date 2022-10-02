@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return
     }
 
-    const session = await getSession(req, res)
+    const session = await getSession({ req, res })
 
     if(!session || !session.user || !session.user.email) {
        return res.status(401).json({ message: 'Not authenticated' })
