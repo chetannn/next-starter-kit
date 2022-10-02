@@ -62,7 +62,7 @@ export default function Login() {
 
 
           <div className='mt-4'>
-            <Button loading={loading} className="w-full">Login</Button>
+            <Button disabled={loading} loading={loading} className="w-full">Login</Button>
 
             <Link href='/auth/forgot-password'>
               <a className='flex justify-end text-sm mt-3 text-purple-600'>

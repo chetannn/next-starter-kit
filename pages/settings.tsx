@@ -61,7 +61,7 @@ export default function Settings() {
 
                     <footer className="rounded-b-lg px-6 py-3 bg-gray-50">
                         <div className="flex items-center justify-end space-x-2">
-                            <Button loading={loading} className="inline-flex items-center text-sm">Change Password</Button>
+                            <Button disabled={loading} loading={loading} className="inline-flex items-center text-sm">Change Password</Button>
                         </div>
                     </footer>
                 </form>
