@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Layout from '../components/Layout'
 import { getSession } from '../lib/auth';
 
@@ -10,9 +10,8 @@ import { getSession } from '../lib/auth';
   );
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-   const { req, res } = context
-   const session = await getSession(req, res)
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+   const session = await getSession(context)
 
    if(!session?.user) {
       return {

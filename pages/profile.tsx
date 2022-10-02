@@ -1,4 +1,4 @@
-import type { GetServerSidePropsContext } from 'next'
+import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
 import { useSession } from 'next-auth/react'
@@ -53,9 +53,8 @@ export default function Login() {
     )
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-   const { req, res } = context
-   const session = await getSession(req, res)
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+   const session = await getSession(context)
 
    if(!session?.user) {
       return {
