@@ -7,9 +7,9 @@ const userSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string().min(8, "Please enter atleast 8 characters"),
-  confirmPassword: z.string().min(8, "Please enter atleast 8 characters")
+  confirm_password: z.string().min(8, "Please enter atleast 8 characters")
 })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirm_password, {
     message: "Password and Confirm Password should match"
   })
 
