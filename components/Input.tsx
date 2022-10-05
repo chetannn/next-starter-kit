@@ -9,7 +9,7 @@ interface PropTypes {
 const Input = ({ className, onChange, value, type, placeholder} : PropTypes) => {
   return (
     <input
-      className={`${className} rounded border focus:border-2 focus:outline-none focus:border-purple-600`}
+      className={`${className} rounded border focus:ring-2 focus:outline-none focus:ring-purple-600`}
       onChange={onChange}
       value={value}
       type={type}
