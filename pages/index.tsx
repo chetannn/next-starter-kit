@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <div className='flex-1 flex items-center justify-center'>
           <div className='bg-white max-w-4xl mx-auto p-8 rounded-lg shadow-lg'>
             <h2 className='font-bold text-gray-900 text-xl'>Next Starter kit: Next.js + Next Auth + Tailwind + Prisma</h2>
-            <div className='text-sm text-gray-800 my-4'>A beatifully crafted, production ready starter kit built using Next.js.
+            <div className='text-sm text-gray-800 my-4'>A beautifully crafted, production ready starter kit built using Next.js.
               It's like <AppLink className="font-bold text-purple-600 hover:underline" target="_blank" href="https://github.com/laravel/breeze">Laravel Breeze </AppLink>
               for Next.js which includes Email Verification, Password Reset etc. out of the box.
             </div>
