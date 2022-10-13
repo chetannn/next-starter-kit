@@ -41,7 +41,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
    const { currentPassword, newPassword, confirmNewPassword } =  parsedSchema.data
 
-   if(await !comparePassword(currentPassword, user.password)) {
+   const hasMatchedPassword = await comparePassword(currentPassword, user.password)
+
+   if(!hasMatchedPassword) {
      return res.status(400).json({ error: 'Incorrect Password' })
    }
 
